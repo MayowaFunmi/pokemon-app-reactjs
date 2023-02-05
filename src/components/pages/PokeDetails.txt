@@ -1,0 +1,40 @@
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { getPokemonDetail } from '../../features/pokeSlice';
+import CardParent from './CardParent';
+
+const PokeDetails = () => {
+  const pokeName = useParams().name
+  //console.log("params = ", pokeName)
+  let dispatch = useDispatch();
+  const pokeObjState = useSelector((state) => state.pokemonState);
+  const { pokeObjectData, pokeObjectStatus } = useSelector((state) => state.pokemonState);
+
+  useEffect(() => {
+    dispatch(getPokemonDetail(pokeName)
+    )
+  }, []);
+
+  return (
+    <React.Fragment>
+      <div className="detailsContainer">
+        <div className="detailContent">
+          <h5>{pokeName} {pokeObjectData.id}</h5>
+          <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeObjectData.id}.png`} alt="" width="200" height="200" />
+          <Link to="/">
+            <h5>
+              <i className="fa fa-arrow-left">BACK</i>
+            </h5>
+          </Link>
+        </div>
+      </div>
+
+      <div>
+        <CardParent data={pokeObjectData} check={pokeObjectStatus} />
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default PokeDetails;
