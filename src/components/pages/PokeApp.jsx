@@ -31,18 +31,18 @@ const PokeApp = () => {
   };
 
   const handlePrevious = () => {
-    setPokeData([]);
+    //setPokeData([]);
     setUrl(previous);
   };
 
   const handleNext = () => {
-    setPokeData([]);
+    //setPokeData([]);
     setUrl(next);
   };
 
   useEffect(() => {
     dispatch(getPokemonName(url));
-  }, [url]);
+  }, [dispatch, url]);
 
   useEffect(() => {
     getEachPokemon(pokeResults);

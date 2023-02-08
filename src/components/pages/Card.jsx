@@ -1,4 +1,5 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
 const Card = ({ pokemon }) => {
@@ -7,7 +8,7 @@ const Card = ({ pokemon }) => {
     <React.Fragment>
       {pokemon.map((item) => {
         return (
-          <div key={item.name}>
+          <div key={`${item.id}-${item.name}`}>
             <div className="pokeItem">
               <div className="pokeNameContainer centered">
                 <p>
@@ -16,7 +17,11 @@ const Card = ({ pokemon }) => {
               </div>
               <div className="viewImageContainer centered">
                 <Link to={`/details/${item.name}`}>
-                  <img src={item.sprites.front_default} alt={item.name} />
+                  <LazyLoadImage
+                    src={item.sprites.front_default}
+                    loading="lazy"
+                    alt={item.name}
+                  />
                 </Link>
               </div>
             </div>
