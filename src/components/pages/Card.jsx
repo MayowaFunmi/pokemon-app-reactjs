@@ -8,7 +8,7 @@ const Card = ({ pokemon }) => {
     <React.Fragment>
       {pokemon.map((item) => {
         return (
-          <div key={`${item.id}-${item.name}`}>
+          <React.Fragment key={`${item.id}-${item.name}`}>
             <div className="pokeItem">
               <div className="pokeNameContainer centered">
                 <p>
@@ -25,7 +25,7 @@ const Card = ({ pokemon }) => {
                 </Link>
               </div>
             </div>
-          </div>
+          </React.Fragment>
         );
       })}
     </React.Fragment>

@@ -12,7 +12,7 @@ import SearchAppBar from './SearchAppBar';
 const PokeApp = () => {
   const dispatch = useDispatch();
   const pokemonState = useSelector((state) => state.pokemonState);
-  const { pokeResults, next, previous } = useSelector(
+  const { pokeResults, next, previous, getPokeStatus } = useSelector(
     (state) => state.pokemonState
   );
 
@@ -46,7 +46,7 @@ const PokeApp = () => {
 
   useEffect(() => {
     getEachPokemon(pokeResults);
-  }, [next]);
+  }, [pokeResults]);
 
   return (
     <React.Fragment>
@@ -64,15 +64,15 @@ const PokeApp = () => {
         </div>
 
         <div className="card-body">
-          <div className="pokeContainer">
-            {pokemonState.getPokeStatus === 'pending' ? (
-              <h3>Loading ... Please wait</h3>
-            ) : null}
+          {pokemonState.getPokeStatus === 'pending' ? (
+            <h3>Loading ... Please wait</h3>
+          ) : null}
 
-            {pokemonState.getPokeStatus === 'success' ? (
+          {getPokeStatus === 'success' ? (
+            <div className="pokeContainer">
               <Card pokemon={pokeData} />
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </div>
       </div>
       <Stack direction="row" spacing={10}>
